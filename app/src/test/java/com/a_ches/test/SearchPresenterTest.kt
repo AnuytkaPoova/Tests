@@ -2,9 +2,10 @@ package com.a_ches.test
 
 import com.a_ches.test.model.SearchResponse
 import com.a_ches.test.model.SearchResult
-import com.a_ches.test.presenter.SearchPresenter
+import com.a_ches.test.presenter.search.SearchPresenter
 import com.a_ches.test.repository.GitHubRepository
 import com.a_ches.test.view.ViewContract
+import com.a_ches.test.view.search.ViewSearchContract
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +22,7 @@ class SearchPresenterTest {
     private lateinit var repository: GitHubRepository
 
     @Mock
-    private lateinit var viewContract: ViewContract
+    private lateinit var viewContract: ViewSearchContract
 
     @Before
     fun setUp() {

@@ -1,4 +1,4 @@
-package com.a_ches.test.view
+package com.a_ches.test.view.search
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.a_ches.test.view
+package com.a_ches.test.view.search
 
 import android.os.Bundle
 import android.view.View
@@ -9,18 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import com.a_ches.test.R
 import com.a_ches.test.model.SearchResult
 import com.a_ches.test.presenter.PresenterContract
-import com.a_ches.test.presenter.SearchPresenter
+import com.a_ches.test.presenter.search.PresenterSearchContract
+import com.a_ches.test.presenter.search.SearchPresenter
 import com.a_ches.test.repository.GitHubApi
 import com.a_ches.test.repository.GitHubRepository
+import com.a_ches.test.view.ViewContract
+import com.a_ches.test.view.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ViewContract {
+class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private val adapter = SearchResultAdapter()
-    private val presenter: PresenterContract = SearchPresenter(this, createRepository())
+    private val presenter: PresenterSearchContract = SearchPresenter(this, createRepository())
+    private var totalCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,9 @@ class MainActivity : AppCompatActivity(), ViewContract {
     }
 
     private fun setUI() {
+        toDetailsActivityButton.setOnClickListener {
+            startActivity(DetailsActivity.getIntent(this, totalCount))
+        }
         setQueryListener()
         setRecyclerView()
     }
@@ -39,7 +46,7 @@ class MainActivity : AppCompatActivity(), ViewContract {
     }
 
     private fun setQueryListener() {
-        searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = searchEditText.text.toString()
                 if (query.isNotBlank()) {
@@ -73,9 +80,8 @@ class MainActivity : AppCompatActivity(), ViewContract {
         searchResults: List<SearchResult>,
         totalCount: Int
     ) {
+        this.totalCount = totalCount
         adapter.updateResults(searchResults)
-        resultsCountTextView.text =
-            String.format(Locale.getDefault(), getString(R.string.results_count), totalCount)
     }
 
     override fun displayError() {
