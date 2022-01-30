@@ -20,6 +20,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
 class DetailsActivityTest {
+
     private lateinit var scenario: ActivityScenario<DetailsActivity>
     private lateinit var context: Context
 
@@ -123,5 +124,4 @@ class DetailsActivityTest {
     fun close() {
         scenario.close()
     }
-
 }

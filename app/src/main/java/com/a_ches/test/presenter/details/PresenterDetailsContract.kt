@@ -7,3 +7,4 @@ internal interface PresenterDetailsContract : PresenterContract {
     fun onIncrement()
     fun onDecrement()
 }
+
