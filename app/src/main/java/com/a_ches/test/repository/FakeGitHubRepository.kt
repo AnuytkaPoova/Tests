@@ -13,3 +13,4 @@ internal class FakeGitHubRepository : RepositoryContract {
         callback.handleGitHubResponse(Response.success(SearchResponse(42, listOf())))
     }
 }
+
