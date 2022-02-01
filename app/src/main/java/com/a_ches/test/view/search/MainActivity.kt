@@ -1,6 +1,7 @@
 package com.a_ches.test.view.search
 
 import android.os.Bundle
+import android.renderscript.Element.TYPE
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Boolean.TYPE
+import java.lang.Void.TYPE
 import java.util.*
 
 class MainActivity : AppCompatActivity(), ViewSearchContract {
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun setQueryListener() {
-        searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+        searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = searchEditText.text.toString()
                 if (query.isNotBlank()) {
