@@ -1,4 +1,4 @@
-package com.a_ches.test
+package com.a_ches.test.view.search
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.a_ches.test", appContext.packageName)
+        assertEquals("com.geekbrains.tests", appContext.packageName)
     }
 }
